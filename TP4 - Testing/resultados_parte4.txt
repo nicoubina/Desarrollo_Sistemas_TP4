@@ -1,0 +1,362 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.7.0
+rootdir: C:\Proyectos\Desarrollo de Sistemas\Desarrollo_Sistemas_TP4\TP4 - Testing
+plugins: anyio-4.15.1, cov-7.1.0
+collected 75 items
+
+test_integracion.py .FFFFFFFFF.F.FFFF.........FFF                        [ 38%]
+test_e2e.py .FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF....FFFF               [100%]
+
+================================== FAILURES ===================================
+_ test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito0-CABA-None-fecha0-CARRITO_VACIO] _
+test_integracion.py:70: in test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items
+    assert (contar(ruta, "pedidos"), contar(ruta, "items")) == (0, 0)
+E   assert (1, 0) == (0, 0)
+E
+E     At index 0 diff: 1 != 0
+E     Use -v to get more diff
+_ test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito1-CABA-None-fecha1-PRODUCTO_INEXISTENTE] _
+test_integracion.py:70: in test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items
+    assert (contar(ruta, "pedidos"), contar(ruta, "items")) == (0, 0)
+E   assert (1, 0) == (0, 0)
+E
+E     At index 0 diff: 1 != 0
+E     Use -v to get more diff
+_ test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito2-CABA-None-fecha2-TALLE_INVALIDO] _
+test_integracion.py:70: in test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items
+    assert (contar(ruta, "pedidos"), contar(ruta, "items")) == (0, 0)
+E   assert (1, 0) == (0, 0)
+E
+E     At index 0 diff: 1 != 0
+E     Use -v to get more diff
+_ test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito3-CABA-None-fecha3-CANTIDAD_INVALIDA] _
+test_integracion.py:70: in test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items
+    assert (contar(ruta, "pedidos"), contar(ruta, "items")) == (0, 0)
+E   assert (1, 0) == (0, 0)
+E
+E     At index 0 diff: 1 != 0
+E     Use -v to get more diff
+_ test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito4-CABA-NOEXISTE-fecha4-CUPON_INVALIDO] _
+test_integracion.py:70: in test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items
+    assert (contar(ruta, "pedidos"), contar(ruta, "items")) == (0, 0)
+E   assert (1, 0) == (0, 0)
+E
+E     At index 0 diff: 1 != 0
+E     Use -v to get more diff
+_ test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito5-CABA-EGRESADOS2026-fecha5-CUPON_VENCIDO] _
+test_integracion.py:70: in test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items
+    assert (contar(ruta, "pedidos"), contar(ruta, "items")) == (0, 0)
+E   assert (1, 0) == (0, 0)
+E
+E     At index 0 diff: 1 != 0
+E     Use -v to get more diff
+_ test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito6-CABA-BIENVENIDA-fecha6-CUPON_MINIMO_NO_ALCANZADO] _
+test_integracion.py:70: in test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items
+    assert (contar(ruta, "pedidos"), contar(ruta, "items")) == (0, 0)
+E   assert (1, 0) == (0, 0)
+E
+E     At index 0 diff: 1 != 0
+E     Use -v to get more diff
+_ test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito7-MARTE-None-fecha7-ZONA_INVALIDA] _
+test_integracion.py:70: in test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items
+    assert (contar(ruta, "pedidos"), contar(ruta, "items")) == (0, 0)
+E   assert (1, 0) == (0, 0)
+E
+E     At index 0 diff: 1 != 0
+E     Use -v to get more diff
+______ test_un_pedido_es_definitivo_con_todos_sus_items_en_otra_conexion ______
+test_integracion.py:88: in test_un_pedido_es_definitivo_con_todos_sus_items_en_otra_conexion
+    assert sorted(recuperado["items"], key=lambda i: i["producto"]) == [
+E   AssertionError: assert [] == [{'producto':...('11999.50')}]
+E
+E     Right contains 2 more items, first extra item: {'producto': 'buzo', 'talle': 'M', 'cantidad': 2, 'precio_unitario': Decimal('24999.90')}
+E     Use -v to get more diff
+__ test_los_importes_recuperados_son_decimal_identicos_a_checkout[descuento] __
+test_integracion.py:112: in test_los_importes_recuperados_son_decimal_identicos_a_checkout
+    assert recuperado[campo] == esperado[campo]
+E   AssertionError: assert Decimal('1799.930000000000063664629124104976654052734375') == Decimal('1799.93')
+____ test_los_importes_recuperados_son_decimal_identicos_a_checkout[total] ____
+test_integracion.py:112: in test_los_importes_recuperados_son_decimal_identicos_a_checkout
+    assert recuperado[campo] == esperado[campo]
+E   AssertionError: assert Decimal('12699.5699999999997089616954326629638671875') == Decimal('12699.57')
+_________ test_el_precio_unitario_guardado_es_el_del_catalogo[extra0] _________
+test_integracion.py:126: in test_el_precio_unitario_guardado_es_el_del_catalogo
+    assert precio == Decimal("24999.90")
+E   AssertionError: assert Decimal('1') == Decimal('24999.90')
+E    +  where Decimal('24999.90') = Decimal('24999.90')
+_________ test_el_precio_unitario_guardado_es_el_del_catalogo[extra1] _________
+test_integracion.py:126: in test_el_precio_unitario_guardado_es_el_del_catalogo
+    assert precio == Decimal("24999.90")
+E   AssertionError: assert Decimal('24999.9000000000014551915228366851806640625') == Decimal('24999.90')
+E    +  where Decimal('24999.90') = Decimal('24999.90')
+_________ test_el_precio_unitario_guardado_es_el_del_catalogo[extra2] _________
+test_integracion.py:126: in test_el_precio_unitario_guardado_es_el_del_catalogo
+    assert precio == Decimal("24999.90")
+E   AssertionError: assert Decimal('24999.9000000000014551915228366851806640625') == Decimal('24999.90')
+E    +  where Decimal('24999.90') = Decimal('24999.90')
+__ test_el_email_es_un_dato_y_no_puede_alterar_la_consulta_sql[x' OR '1'='1] __
+test_integracion.py:187: in test_el_email_es_un_dato_y_no_puede_alterar_la_consulta_sql
+    assert resultados == []
+E   AssertionError: assert [{'id': 1, 'e...': None, ...}] == []
+E
+E     Left contains one more item: {'id': 1, 'email': 'privado@mail.com', 'zona': 'CABA', 'cupon': None, ...}
+E     Use -v to get more diff
+__ test_el_email_es_un_dato_y_no_puede_alterar_la_consulta_sql[x' OR 1=1 --] __
+test_integracion.py:187: in test_el_email_es_un_dato_y_no_puede_alterar_la_consulta_sql
+    assert resultados == []
+E   AssertionError: assert [{'id': 1, 'e...': None, ...}] == []
+E
+E     Left contains one more item: {'id': 1, 'email': 'privado@mail.com', 'zona': 'CABA', 'cupon': None, ...}
+E     Use -v to get more diff
+__________ test_un_email_con_apostrofe_se_consulta_como_dato_literal __________
+test_integracion.py:196: in test_un_email_con_apostrofe_se_consulta_como_dato_literal
+    resultados = pedidos.pedidos_de(con, email)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pedidos.py:106: in pedidos_de
+    filas = con.execute(
+E   sqlite3.OperationalError: near "connor": syntax error
+_______ test_post_crea_un_pedido_y_devuelve_importes_exactos_como_texto _______
+test_e2e.py:86: in test_post_crea_un_pedido_y_devuelve_importes_exactos_como_texto
+    comprobar_importes(respuesta, {
+test_e2e.py:71: in comprobar_importes
+    assert type(cuerpo[campo]) is str, f"{campo} debe viajar como texto: {cuerpo[campo]!r}"
+E   AssertionError: subtotal debe viajar como texto: 49999.8
+E   assert <class 'float'> is str
+E    +  where <class 'float'> = type(49999.8)
+____________ test_get_recupera_el_pedido_completo_despues_del_post ____________
+test_e2e.py:107: in test_get_recupera_el_pedido_completo_despues_del_post
+    comprobar_importes(recuperado, {
+test_e2e.py:71: in comprobar_importes
+    assert type(cuerpo[campo]) is str, f"{campo} debe viajar como texto: {cuerpo[campo]!r}"
+E   AssertionError: subtotal debe viajar como texto: 0.0
+E   assert <class 'float'> is str
+E    +  where <class 'float'> = type(0.0)
+_____ test_post_interpreta_la_fecha_iso_y_acepta_el_ultimo_dia_del_cupon ______
+test_e2e.py:132: in test_post_interpreta_la_fecha_iso_y_acepta_el_ultimo_dia_del_cupon
+    assert status == 201
+E   assert 500 == 201
+_ test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios0-CARRITO_VACIO] _
+test_e2e.py:159: in test_cada_error_de_negocio_devuelve_422_con_su_codigo
+    assert status == 422
+E   assert 500 == 422
+_ test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios1-PRODUCTO_INEXISTENTE] _
+test_e2e.py:159: in test_cada_error_de_negocio_devuelve_422_con_su_codigo
+    assert status == 422
+E   assert 500 == 422
+_ test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios2-TALLE_INVALIDO] _
+test_e2e.py:159: in test_cada_error_de_negocio_devuelve_422_con_su_codigo
+    assert status == 422
+E   assert 500 == 422
+_ test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios3-CANTIDAD_INVALIDA] _
+test_e2e.py:159: in test_cada_error_de_negocio_devuelve_422_con_su_codigo
+    assert status == 422
+E   assert 500 == 422
+_ test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios4-CUPON_INVALIDO] _
+test_e2e.py:159: in test_cada_error_de_negocio_devuelve_422_con_su_codigo
+    assert status == 422
+E   assert 500 == 422
+_ test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios5-CUPON_VENCIDO] _
+test_e2e.py:159: in test_cada_error_de_negocio_devuelve_422_con_su_codigo
+    assert status == 422
+E   assert 500 == 422
+_ test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios6-CUPON_MINIMO_NO_ALCANZADO] _
+test_e2e.py:159: in test_cada_error_de_negocio_devuelve_422_con_su_codigo
+    assert status == 422
+E   assert 500 == 422
+_ test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios7-ZONA_INVALIDA] _
+test_e2e.py:159: in test_cada_error_de_negocio_devuelve_422_con_su_codigo
+    assert status == 422
+E   assert 500 == 422
+_______ test_un_cuerpo_que_no_es_json_valido_devuelve_400[{no es json] ________
+test_e2e.py:170: in test_un_cuerpo_que_no_es_json_valido_devuelve_400
+    assert status == 400
+E   assert 500 == 400
+_____________ test_un_cuerpo_que_no_es_json_valido_devuelve_400[] _____________
+test_e2e.py:170: in test_un_cuerpo_que_no_es_json_valido_devuelve_400
+    assert status == 400
+E   assert 500 == 400
+________ test_un_cuerpo_que_no_es_json_valido_devuelve_400[{"email":] _________
+test_e2e.py:170: in test_un_cuerpo_que_no_es_json_valido_devuelve_400
+    assert status == 400
+E   assert 500 == 400
+_____ test_un_campo_obligatorio_ausente_devuelve_datos_incompletos[email] _____
+test_e2e.py:184: in test_un_campo_obligatorio_ausente_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_____ test_un_campo_obligatorio_ausente_devuelve_datos_incompletos[zona] ______
+test_e2e.py:184: in test_un_campo_obligatorio_ausente_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+____ test_un_campo_obligatorio_ausente_devuelve_datos_incompletos[carrito] ____
+test_e2e.py:184: in test_un_campo_obligatorio_ausente_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[email-None] _
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[email-5] __
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[email-valor2] _
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[zona-None] _
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+__ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[zona-5] __
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[zona-valor5] _
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[carrito-None] _
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[carrito-buzo] _
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_ test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[carrito-valor8] _
+test_e2e.py:201: in test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_______ test_un_json_que_no_es_objeto_devuelve_datos_incompletos[null] ________
+test_e2e.py:212: in test_un_json_que_no_es_objeto_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+________ test_un_json_que_no_es_objeto_devuelve_datos_incompletos[[]] _________
+test_e2e.py:212: in test_un_json_que_no_es_objeto_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+______ test_un_json_que_no_es_objeto_devuelve_datos_incompletos["texto"] ______
+test_e2e.py:212: in test_un_json_que_no_es_objeto_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+________ test_un_json_que_no_es_objeto_devuelve_datos_incompletos[123] ________
+test_e2e.py:212: in test_un_json_que_no_es_objeto_devuelve_datos_incompletos
+    assert status == 400
+E   assert 500 == 400
+_____ test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[30/11/2026] _____
+test_e2e.py:225: in test_una_fecha_sin_formato_iso_o_imposible_devuelve_400
+    assert status == 400
+E   assert 201 == 400
+_____ test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[2026-11-31] _____
+test_e2e.py:225: in test_una_fecha_sin_formato_iso_o_imposible_devuelve_400
+    assert status == 400
+E   assert 201 == 400
+_____ test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[2026-1-01] ______
+test_e2e.py:225: in test_una_fecha_sin_formato_iso_o_imposible_devuelve_400
+    assert status == 400
+E   assert 201 == 400
+__________ test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[] __________
+test_e2e.py:225: in test_una_fecha_sin_formato_iso_o_imposible_devuelve_400
+    assert status == 400
+E   assert 201 == 400
+______ test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[20261130] ______
+test_e2e.py:225: in test_una_fecha_sin_formato_iso_o_imposible_devuelve_400
+    assert status == 400
+E   assert 201 == 400
+______________ test_get_de_un_pedido_inexistente_devuelve_404[0] ______________
+test_e2e.py:236: in test_get_de_un_pedido_inexistente_devuelve_404
+    assert status == 404
+E   assert 200 == 404
+_____________ test_get_de_un_pedido_inexistente_devuelve_404[999] _____________
+test_e2e.py:236: in test_get_de_un_pedido_inexistente_devuelve_404
+    assert status == 404
+E   assert 200 == 404
+_ test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente[cambios0-esperado0] _
+test_e2e.py:273: in test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente
+    comprobar_importes(respuesta, esperado)
+test_e2e.py:71: in comprobar_importes
+    assert type(cuerpo[campo]) is str, f"{campo} debe viajar como texto: {cuerpo[campo]!r}"
+E   AssertionError: subtotal debe viajar como texto: 24999.9
+E   assert <class 'float'> is str
+E    +  where <class 'float'> = type(24999.9)
+_ test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente[cambios1-esperado1] _
+test_e2e.py:273: in test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente
+    comprobar_importes(respuesta, esperado)
+test_e2e.py:71: in comprobar_importes
+    assert type(cuerpo[campo]) is str, f"{campo} debe viajar como texto: {cuerpo[campo]!r}"
+E   AssertionError: subtotal debe viajar como texto: 59997.5
+E   assert <class 'float'> is str
+E    +  where <class 'float'> = type(59997.5)
+_ test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente[cambios2-esperado2] _
+test_e2e.py:273: in test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente
+    comprobar_importes(respuesta, esperado)
+test_e2e.py:71: in comprobar_importes
+    assert type(cuerpo[campo]) is str, f"{campo} debe viajar como texto: {cuerpo[campo]!r}"
+E   AssertionError: subtotal debe viajar como texto: 24999.9
+E   assert <class 'float'> is str
+E    +  where <class 'float'> = type(24999.9)
+________ test_un_error_no_impide_crear_y_recuperar_la_compra_siguiente ________
+test_e2e.py:287: in test_un_error_no_impide_crear_y_recuperar_la_compra_siguiente
+    assert status_error == 422
+E   assert 500 == 422
+- generated xml file: C:\Proyectos\Desarrollo de Sistemas\verificacion-parte4.xml -
+=========================== short test summary info ===========================
+FAILED test_integracion.py::test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito0-CABA-None-fecha0-CARRITO_VACIO]
+FAILED test_integracion.py::test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito1-CABA-None-fecha1-PRODUCTO_INEXISTENTE]
+FAILED test_integracion.py::test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito2-CABA-None-fecha2-TALLE_INVALIDO]
+FAILED test_integracion.py::test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito3-CABA-None-fecha3-CANTIDAD_INVALIDA]
+FAILED test_integracion.py::test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito4-CABA-NOEXISTE-fecha4-CUPON_INVALIDO]
+FAILED test_integracion.py::test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito5-CABA-EGRESADOS2026-fecha5-CUPON_VENCIDO]
+FAILED test_integracion.py::test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito6-CABA-BIENVENIDA-fecha6-CUPON_MINIMO_NO_ALCANZADO]
+FAILED test_integracion.py::test_un_error_de_checkout_se_propaga_y_no_guarda_pedido_ni_items[carrito7-MARTE-None-fecha7-ZONA_INVALIDA]
+FAILED test_integracion.py::test_un_pedido_es_definitivo_con_todos_sus_items_en_otra_conexion
+FAILED test_integracion.py::test_los_importes_recuperados_son_decimal_identicos_a_checkout[descuento]
+FAILED test_integracion.py::test_los_importes_recuperados_son_decimal_identicos_a_checkout[total]
+FAILED test_integracion.py::test_el_precio_unitario_guardado_es_el_del_catalogo[extra0]
+FAILED test_integracion.py::test_el_precio_unitario_guardado_es_el_del_catalogo[extra1]
+FAILED test_integracion.py::test_el_precio_unitario_guardado_es_el_del_catalogo[extra2]
+FAILED test_integracion.py::test_el_email_es_un_dato_y_no_puede_alterar_la_consulta_sql[x' OR '1'='1]
+FAILED test_integracion.py::test_el_email_es_un_dato_y_no_puede_alterar_la_consulta_sql[x' OR 1=1 --]
+FAILED test_integracion.py::test_un_email_con_apostrofe_se_consulta_como_dato_literal
+FAILED test_e2e.py::test_post_crea_un_pedido_y_devuelve_importes_exactos_como_texto
+FAILED test_e2e.py::test_get_recupera_el_pedido_completo_despues_del_post - A...
+FAILED test_e2e.py::test_post_interpreta_la_fecha_iso_y_acepta_el_ultimo_dia_del_cupon
+FAILED test_e2e.py::test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios0-CARRITO_VACIO]
+FAILED test_e2e.py::test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios1-PRODUCTO_INEXISTENTE]
+FAILED test_e2e.py::test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios2-TALLE_INVALIDO]
+FAILED test_e2e.py::test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios3-CANTIDAD_INVALIDA]
+FAILED test_e2e.py::test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios4-CUPON_INVALIDO]
+FAILED test_e2e.py::test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios5-CUPON_VENCIDO]
+FAILED test_e2e.py::test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios6-CUPON_MINIMO_NO_ALCANZADO]
+FAILED test_e2e.py::test_cada_error_de_negocio_devuelve_422_con_su_codigo[cambios7-ZONA_INVALIDA]
+FAILED test_e2e.py::test_un_cuerpo_que_no_es_json_valido_devuelve_400[{no es json]
+FAILED test_e2e.py::test_un_cuerpo_que_no_es_json_valido_devuelve_400[] - ass...
+FAILED test_e2e.py::test_un_cuerpo_que_no_es_json_valido_devuelve_400[{"email":]
+FAILED test_e2e.py::test_un_campo_obligatorio_ausente_devuelve_datos_incompletos[email]
+FAILED test_e2e.py::test_un_campo_obligatorio_ausente_devuelve_datos_incompletos[zona]
+FAILED test_e2e.py::test_un_campo_obligatorio_ausente_devuelve_datos_incompletos[carrito]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[email-None]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[email-5]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[email-valor2]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[zona-None]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[zona-5]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[zona-valor5]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[carrito-None]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[carrito-buzo]
+FAILED test_e2e.py::test_un_campo_obligatorio_de_otro_tipo_devuelve_datos_incompletos[carrito-valor8]
+FAILED test_e2e.py::test_un_json_que_no_es_objeto_devuelve_datos_incompletos[null]
+FAILED test_e2e.py::test_un_json_que_no_es_objeto_devuelve_datos_incompletos[[]]
+FAILED test_e2e.py::test_un_json_que_no_es_objeto_devuelve_datos_incompletos["texto"]
+FAILED test_e2e.py::test_un_json_que_no_es_objeto_devuelve_datos_incompletos[123]
+FAILED test_e2e.py::test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[30/11/2026]
+FAILED test_e2e.py::test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[2026-11-31]
+FAILED test_e2e.py::test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[2026-1-01]
+FAILED test_e2e.py::test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[]
+FAILED test_e2e.py::test_una_fecha_sin_formato_iso_o_imposible_devuelve_400[20261130]
+FAILED test_e2e.py::test_get_de_un_pedido_inexistente_devuelve_404[0] - asser...
+FAILED test_e2e.py::test_get_de_un_pedido_inexistente_devuelve_404[999] - ass...
+FAILED test_e2e.py::test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente[cambios0-esperado0]
+FAILED test_e2e.py::test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente[cambios1-esperado1]
+FAILED test_e2e.py::test_post_respeta_los_importes_de_checkout_sin_aceptar_el_precio_del_cliente[cambios2-esperado2]
+FAILED test_e2e.py::test_un_error_no_impide_crear_y_recuperar_la_compra_siguiente
+======================== 58 failed, 17 passed in 6.59s ========================
