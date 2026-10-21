@@ -68,3 +68,14 @@ def test_la_cantidad_maxima_10_es_valida():
 
     # Assert
     assert subtotal == Decimal("119995.00")
+
+
+def test_con_5_prendas_se_aplica_el_10_por_ciento():
+    # Arrange
+    subtotal = Decimal("59997.50")  # 5 remeras
+
+    # Act
+    descuento = calcular_descuento(subtotal, 5, None, HOY_VIGENTE)
+
+    # Assert
+    assert descuento == Decimal("5999.75")
