@@ -79,3 +79,14 @@ def test_con_5_prendas_se_aplica_el_10_por_ciento():
 
     # Assert
     assert descuento == Decimal("5999.75")
+
+
+def test_egresados2026_es_valido_el_30_de_noviembre_inclusive():
+    # Arrange
+    ultimo_dia = date(2026, 11, 30)
+
+    # Act
+    descuento = calcular_descuento(Decimal("11999.50"), 1, "EGRESADOS2026", ultimo_dia)
+
+    # Assert
+    assert descuento == Decimal("1799.93")
