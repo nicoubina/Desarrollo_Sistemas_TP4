@@ -90,3 +90,14 @@ def test_egresados2026_es_valido_el_30_de_noviembre_inclusive():
 
     # Assert
     assert descuento == Decimal("1799.93")
+
+
+def test_el_precio_enviado_por_el_cliente_se_ignora():
+    # Arrange
+    carrito = [item("buzo", "M", 1, precio=Decimal("1"))]
+
+    # Act
+    subtotal = calcular_subtotal(carrito)
+
+    # Assert
+    assert subtotal == Decimal("24999.90")
