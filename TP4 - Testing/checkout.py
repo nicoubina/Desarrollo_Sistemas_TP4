@@ -1,6 +1,6 @@
 import json
 from datetime import date
-from decimal import Decimal
+from decimal import ROUND_HALF_UP, Decimal
 
 
 class CheckoutError(Exception):
@@ -32,6 +32,10 @@ ENVIOS = {
 }
 
 
+def _redondear(importe):
+    return importe.quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)
+
+
 def validar_item(item):
     item["talle"] = item["talle"].upper()
 
@@ -52,7 +56,7 @@ def calcular_subtotal(carrito):
             continue
         subtotal += precio * item["cantidad"]
 
-    return round(subtotal, 2)
+    return _redondear(subtotal)
 
 
 def calcular_descuento(subtotal, cantidad_prendas, cupon=None, fecha=date.today()):
@@ -82,7 +86,7 @@ def calcular_descuento(subtotal, cantidad_prendas, cupon=None, fecha=date.today(
                 )
             descuento += datos["valor"]
 
-    return round(descuento, 2)
+    return _redondear(descuento)
 
 
 def calcular_envio(subtotal, zona):
@@ -115,6 +119,6 @@ def calcular_total(carrito, zona, cupon=None, fecha=date.today()):
         "subtotal": subtotal,
         "descuento": descuento,
         "envio": envio,
-        "total": round(total, 2),
+        "total": _redondear(total),
     }
     return resultado
