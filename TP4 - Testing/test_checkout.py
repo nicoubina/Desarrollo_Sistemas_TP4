@@ -46,3 +46,14 @@ def test_calcular_total_devuelve_importes_decimal_exactos():
         "envio": Decimal("2500"),
         "total": Decimal("52499.80"),
     }
+
+
+def test_el_15_por_ciento_redondea_el_medio_centavo_hacia_arriba():
+    # Arrange
+    subtotal = Decimal("11999.50")  # 15% = 1799.925
+
+    # Act
+    descuento = calcular_descuento(subtotal, 1, "EGRESADOS2026", HOY_VIGENTE)
+
+    # Assert
+    assert descuento == Decimal("1799.93")
