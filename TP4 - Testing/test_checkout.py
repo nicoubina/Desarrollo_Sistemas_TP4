@@ -57,3 +57,14 @@ def test_el_15_por_ciento_redondea_el_medio_centavo_hacia_arriba():
 
     # Assert
     assert descuento == Decimal("1799.93")
+
+
+def test_la_cantidad_maxima_10_es_valida():
+    # Arrange
+    carrito = [item("remera", "M", 10)]
+
+    # Act
+    subtotal = calcular_subtotal(carrito)
+
+    # Assert
+    assert subtotal == Decimal("119995.00")
