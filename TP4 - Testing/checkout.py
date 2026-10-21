@@ -1,5 +1,6 @@
 import json
 from datetime import date
+from decimal import Decimal
 
 
 class CheckoutError(Exception):
@@ -10,24 +11,24 @@ class CheckoutError(Exception):
 
 
 CATALOGO = {
-    "buzo": 24999.90,
-    "remera": 11999.50,
-    "campera": 47999.99,
+    "buzo": Decimal("24999.90"),
+    "remera": Decimal("11999.50"),
+    "campera": Decimal("47999.99"),
 }
 
 TALLES = ["XS", "S", "M", "L", "XL", "XXL"]
 
 CUPONES = {
-    "EGRESADOS2026": {"tipo": "porcentaje", "valor": 0.15, "vence": date(2026, 11, 30)},
-    "BIENVENIDA": {"tipo": "fijo", "valor": 3000, "minimo": 20000},
-    "DEBUG100": {"tipo": "porcentaje", "valor": 1.0, "vence": date(2099, 12, 31)},
+    "EGRESADOS2026": {"tipo": "porcentaje", "valor": Decimal("0.15"), "vence": date(2026, 11, 30)},
+    "BIENVENIDA": {"tipo": "fijo", "valor": Decimal("3000"), "minimo": Decimal("20000")},
+    "DEBUG100": {"tipo": "porcentaje", "valor": Decimal("1.0"), "vence": date(2099, 12, 31)},
 }
 
 ENVIOS = {
-    "CABA": 2500,
-    "GBA": 4000,
-    "INTERIOR": 6500,
-    "RETIRO": 0,
+    "CABA": Decimal("2500"),
+    "GBA": Decimal("4000"),
+    "INTERIOR": Decimal("6500"),
+    "RETIRO": Decimal("0"),
 }
 
 
@@ -42,7 +43,7 @@ def validar_item(item):
 
 
 def calcular_subtotal(carrito):
-    subtotal = 0
+    subtotal = Decimal("0")
     for item in carrito:
         validar_item(item)
         try:
@@ -55,10 +56,10 @@ def calcular_subtotal(carrito):
 
 
 def calcular_descuento(subtotal, cantidad_prendas, cupon=None, fecha=date.today()):
-    descuento = 0
+    descuento = Decimal("0")
 
     if cantidad_prendas > 5:
-        descuento += subtotal * 0.10
+        descuento += subtotal * Decimal("0.10")
 
     if cupon != None:
         codigo = cupon.strip()
@@ -94,7 +95,7 @@ def calcular_envio(subtotal, zona):
         )
 
     if subtotal >= 60000:
-        return 0
+        return Decimal("0")
 
     return ENVIOS[zona]
 
