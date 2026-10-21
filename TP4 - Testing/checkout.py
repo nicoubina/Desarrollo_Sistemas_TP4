@@ -1,4 +1,3 @@
-import json
 from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 
@@ -21,7 +20,6 @@ TALLES = ["XS", "S", "M", "L", "XL", "XXL"]
 CUPONES = {
     "EGRESADOS2026": {"tipo": "porcentaje", "valor": Decimal("0.15"), "vence": date(2026, 11, 30)},
     "BIENVENIDA": {"tipo": "fijo", "valor": Decimal("3000"), "minimo": Decimal("20000")},
-    "DEBUG100": {"tipo": "porcentaje", "valor": Decimal("1.0"), "vence": date(2099, 12, 31)},
 }
 
 ENVIOS = {
@@ -37,37 +35,43 @@ def _redondear(importe):
 
 
 def validar_item(item):
-    item["talle"] = item["talle"].upper()
+    producto = item.get("producto")
+    if not isinstance(producto, str) or producto not in CATALOGO:
+        raise CheckoutError("PRODUCTO_INEXISTENTE", f"Producto inexistente: {producto!r}")
 
-    if item["talle"] not in TALLES:
-        raise CheckoutError("TALLE_INVALIDO", f"Talle inválido: {item['talle']}")
+    talle = item.get("talle")
+    if not isinstance(talle, str) or talle.strip().upper() not in TALLES:
+        raise CheckoutError("TALLE_INVALIDO", f"Talle inválido: {talle!r}")
 
-    if not (1 <= item["cantidad"] <= 10):
+    cantidad = item.get("cantidad")
+    if type(cantidad) is not int or not (1 <= cantidad <= 10):
         raise CheckoutError("CANTIDAD_INVALIDA", "La cantidad debe estar entre 1 y 10")
 
 
 def calcular_subtotal(carrito):
+    if not carrito:
+        raise CheckoutError("CARRITO_VACIO", "El carrito está vacío")
+
     subtotal = Decimal("0")
     for item in carrito:
         validar_item(item)
-        try:
-            precio = CATALOGO[item["producto"]]
-        except:
-            continue
-        subtotal += precio * item["cantidad"]
+        subtotal += CATALOGO[item["producto"]] * item["cantidad"]
 
     return _redondear(subtotal)
 
 
-def calcular_descuento(subtotal, cantidad_prendas, cupon=None, fecha=date.today()):
+def calcular_descuento(subtotal, cantidad_prendas, cupon=None, fecha=None):
+    if fecha is None:
+        fecha = date.today()
+
+    por_cantidad = Decimal("0")
+    if cantidad_prendas >= 5:
+        por_cantidad = subtotal * Decimal("0.10")
+
     descuento = Decimal("0")
 
-    if cantidad_prendas >= 5:
-        descuento += subtotal * Decimal("0.10")
-
-    if cupon != None:
-        codigo = cupon.strip()
-
+    codigo = cupon.strip().upper() if cupon is not None else ""
+    if codigo:
         if codigo not in CUPONES:
             raise CheckoutError("CUPON_INVALIDO", "El cupón no existe")
 
@@ -86,25 +90,25 @@ def calcular_descuento(subtotal, cantidad_prendas, cupon=None, fecha=date.today(
                 )
             descuento += datos["valor"]
 
-    return _redondear(descuento)
+    return _redondear(max(por_cantidad, descuento))
 
 
-def calcular_envio(subtotal, zona):
-    zona = zona.strip().upper()
+def calcular_envio(subtotal_con_descuento, zona):
+    codigo = zona.strip().upper() if isinstance(zona, str) else None
 
-    if zona not in ENVIOS:
+    if codigo not in ENVIOS:
         raise CheckoutError(
             "ZONA_INVALIDA",
-            f"Zona inválida. Opciones: {ENVIOS.keys().join(', ')}",
+            f"Zona inválida. Opciones: {', '.join(ENVIOS)}",
         )
 
-    if subtotal >= 60000:
+    if subtotal_con_descuento >= 60000:
         return Decimal("0")
 
-    return ENVIOS[zona]
+    return ENVIOS[codigo]
 
 
-def calcular_total(carrito, zona, cupon=None, fecha=date.today()):
+def calcular_total(carrito, zona, cupon=None, fecha=None):
     subtotal = calcular_subtotal(carrito)
 
     prendas = 0
@@ -112,7 +116,7 @@ def calcular_total(carrito, zona, cupon=None, fecha=date.today()):
         prendas = prendas + item["cantidad"]
 
     descuento = calcular_descuento(subtotal, prendas, cupon, fecha)
-    envio = calcular_envio(subtotal, zona)
+    envio = calcular_envio(subtotal - descuento, zona)
     total = subtotal - descuento + envio
 
     resultado = {

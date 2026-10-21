@@ -1,0 +1,6 @@
+Mutando checkout.py contra test_checkout.py  (motor: pytest)
+
+Mutantes generados : 37
+Muertos            : 37
+Sobrevivientes     : 0
+Puntaje de mutación: 100.0%
