@@ -27,3 +27,22 @@ def codigo_de_error(funcion, *args):
 
 def test_cantidad_cero_es_invalida():
     assert codigo_de_error(validar_item, item(cantidad=0)) == "CANTIDAD_INVALIDA"
+
+
+def test_calcular_total_devuelve_importes_decimal_exactos():
+    # Arrange
+    carrito = [item("buzo", "M", 2)]
+
+    # Act
+    resultado = calcular_total(carrito, "CABA", None, HOY_VIGENTE)
+
+    # Assert
+    assert {clave: type(valor) for clave, valor in resultado.items()} == {
+        "subtotal": Decimal, "descuento": Decimal, "envio": Decimal, "total": Decimal,
+    }
+    assert resultado == {
+        "subtotal": Decimal("49999.80"),
+        "descuento": Decimal("0"),
+        "envio": Decimal("2500"),
+        "total": Decimal("52499.80"),
+    }
